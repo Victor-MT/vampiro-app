@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ficha Vampiro: A Máscara V5</title>
+  <link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+  <div class="toolbar">
+    <button onclick="window.print()">Imprimir</button>
+    <button onclick="exportJSON()">Exportar JSON</button>
+    <button onclick="togglePromptBox()">Gerar por Prompt</button>
+    <button onclick="clearSheet()">Limpar ficha</button>
+  </div>
+
+  <div id="promptDialog" class="dialog-overlay hidden" onclick="closePromptDialogOnBackdrop(event)">
+    <div class="dialog-box" role="dialog" aria-modal="true" aria-labelledby="promptDialogTitle">
+      <button class="dialog-close" onclick="togglePromptBox()" type="button" aria-label="Fechar">×</button>
+
+      <h3 id="promptDialogTitle">Gerar ficha por descrição</h3>
+      <p>Descreva o personagem e envie para a API gerar/preencher a ficha.</p>
+
+      <textarea
+        id="characterPrompt"
+        placeholder="Ex: Um vampiro Nosferatu hacker que vive nos túneis do metrô de São Paulo..."
+      ></textarea>
+
+      <div class="prompt-actions">
+        <button onclick="togglePromptBox()" type="button">Cancelar</button>
+        <button id="sendPromptButton" onclick="sendPromptToApi()" type="button" class="primary">Enviar Prompt</button>
+      </div>
+
+      <div id="promptLoading" class="prompt-loading hidden">
+        <span class="spinner"></span>
+        <span>Gerando ficha...</span>
+      </div>
+    </div>
+  </div>
+
+  <main id="app">
+    <section class="sheet page-1">
+      <div class="logo">Vampiro<small>A Máscara</small></div>
+
+      <div class="grid-info">
+        <div class="field"><label>Nome</label><input data-key="personagem.nome" /></div>
+        <div class="field"><label>Conceito</label><input data-key="personagem.conceito" /></div>
+        <div class="field"><label>Predador</label><input data-key="personagem.predador" /></div>
+        <div class="field"><label>Crônica</label><input data-key="personagem.cronica" /></div>
+        <div class="field"><label>Ambição</label><input data-key="personagem.ambicao" /></div>
+        <div class="field"><label>Clã</label><input data-key="personagem.cla" /></div>
+        <div class="field"><label>Senhor</label><input data-key="personagem.senhor" /></div>
+        <div class="field"><label>Desejo</label><input data-key="personagem.desejo" /></div>
+        <div class="field"><label>Geração</label><input data-key="personagem.geracao" /></div>
+      </div>
+
+      <div class="section-title">Atributos</div>
+      <div class="attributes" id="attributes"></div>
+
+      <div class="track-row">
+        <div>Vitalidade <span class="boxes" data-track="trilhas.vitalidade" data-count="10"></span></div>
+        <div>Força de Vontade <span class="boxes" data-track="trilhas.forca_de_vontade" data-count="10"></span></div>
+      </div>
+
+      <div class="section-title">Habilidades</div>
+      <div class="skills" id="skills"></div>
+
+      <div class="section-title">Disciplinas</div>
+      <div class="disciplines" id="disciplines"></div>
+
+      <div class="footer-states">
+        <div><label>Ressonância</label> <input class="line-input" data-key="estado_vampirico.ressonancia" /></div>
+        <div><label>Fome</label> <span class="dots" data-rating="estado_vampirico.fome" data-count="5"></span></div>
+        <div><label>Humanidade</label> <span class="boxes" data-track="estado_vampirico.humanidade" data-count="10"></span></div>
+      </div>
+
+      <div class="copyright">© 2021 White Wolf Entertainment</div>
+    </section>
+
+    <section class="sheet page-2">
+      <div class="logo">Vampiro<small>A Máscara</small></div>
+
+      <div class="three-boxes">
+        <div class="big-box"><h3>Princípios da Crônica</h3><textarea data-key="cronica.principios_da_cronica"></textarea></div>
+        <div class="big-box"><h3>Pilares & Convicções</h3><textarea data-key="cronica.pilares_e_conviccoes"></textarea></div>
+        <div class="big-box"><h3>Perdição do Clã</h3><textarea data-key="cronica.perdicao_do_cla"></textarea></div>
+      </div>
+
+      <div class="page-2-content">
+        <div>
+          <div class="table-title">Vantagens & Defeitos</div>
+          <div class="advantages" id="advantages"></div>
+          <div class="notes"><label>Notas</label><textarea data-key="notas"></textarea></div>
+        </div>
+
+        <div>
+          <div class="blood-title">Potência de Sangue <span class="dots" data-rating="potencia_de_sangue.nivel" data-count="10"></span></div>
+          <div class="blood-table">
+            <div class="blood-cell"><label>Surto de Sangue</label><textarea data-key="potencia_de_sangue.surto_de_sangue"></textarea></div>
+            <div class="blood-cell"><label>Quantidade Recuperada</label><textarea data-key="potencia_de_sangue.quantidade_recuperada"></textarea></div>
+            <div class="blood-cell"><label>Bônus de Poder</label><textarea data-key="potencia_de_sangue.bonus_de_poder"></textarea></div>
+            <div class="blood-cell"><label>Rerrolagem de Sangue</label><textarea data-key="potencia_de_sangue.rerrolagem_de_sangue"></textarea></div>
+            <div class="blood-cell"><label>Penalidade de Alimentação</label><textarea data-key="potencia_de_sangue.penalidade_de_alimentacao"></textarea></div>
+            <div class="blood-cell"><label>Gravidade da Perdição</label><textarea data-key="potencia_de_sangue.gravidade_da_perdicao"></textarea></div>
+          </div>
+
+          <div class="experience">Experiência Total <input class="line-input" data-key="experiencia.total" /></div>
+          <div class="experience">Experiência Gasta <input class="line-input" data-key="experiencia.gasta" /></div>
+
+          <div class="bio-table">
+            <div class="bio-row"><label>Idade Verdadeira</label><input data-key="biografia.idade_verdadeira" /></div>
+            <div class="bio-row"><label>Idade Aparente</label><input data-key="biografia.idade_aparente" /></div>
+            <div class="bio-row"><label>Data de Nascimento</label><input data-key="biografia.data_de_nascimento" /></div>
+            <div class="bio-row"><label>Data de Morte</label><input data-key="biografia.data_de_morte" /></div>
+            <div class="bio-row large"><label>Aparência</label><textarea data-key="biografia.aparencia"></textarea></div>
+            <div class="bio-row large"><label>Traços Distintivos</label><textarea data-key="biografia.tracos_distintivos"></textarea></div>
+            <div class="bio-row xlarge"><label>História</label><textarea data-key="biografia.historia"></textarea></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">© 2021 White Wolf Entertainment</div>
+    </section>
+  </main>
+
+  <script src="./script.js"></script>
+</body>
+</html>
