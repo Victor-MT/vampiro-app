@@ -286,6 +286,125 @@ Descrição do personagem:
 ${userDescription}
 
 Retorne o JSON exatamente no formato esperado pela ficha.
+
+Formato obrigatório de resposta:
+
+{
+  "personagem": {
+    "nome": "",
+    "conceito": "",
+    "predador": "",
+    "cronica": "",
+    "ambicao": "",
+    "cla": "",
+    "senhor": "",
+    "desejo": "",
+    "geracao": ""
+  },
+  "atributos": {
+    "fisicos": {
+      "forca": 0,
+      "destreza": 0,
+      "vigor": 0
+    },
+    "sociais": {
+      "carisma": 0,
+      "manipulacao": 0,
+      "autocontrole": 0
+    },
+    "mentais": {
+      "inteligencia": 0,
+      "raciocinio": 0,
+      "determinacao": 0
+    }
+  },
+  "trilhas": {
+    "vitalidade": ["vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio"],
+    "forca_de_vontade": ["vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio"]
+  },
+  "habilidades": {
+    "fisicas": {
+      "armas_brancas": 0,
+      "armas_de_fogo": 0,
+      "atletismo": 0,
+      "briga": 0,
+      "conducao": 0,
+      "furtividade": 0,
+      "ladroagem": 0,
+      "oficios": 0,
+      "sobrevivencia": 0
+    },
+    "sociais": {
+      "empatia_com_animais": 0,
+      "etiqueta": 0,
+      "intimidacao": 0,
+      "lideranca": 0,
+      "manha": 0,
+      "performance": 0,
+      "persuasao": 0,
+      "sagacidade": 0,
+      "subterfugio": 0
+    },
+    "mentais": {
+      "ciencia": 0,
+      "erudicao": 0,
+      "financas": 0,
+      "investigacao": 0,
+      "medicina": 0,
+      "ocultismo": 0,
+      "percepcao": 0,
+      "politica": 0,
+      "tecnologia": 0
+    }
+  },
+  "disciplinas": [
+    {
+      "nome": "",
+      "nivel": 0
+    }
+  ],
+  "estado_vampirico": {
+    "ressonancia": "",
+    "fome": 0,
+    "humanidade": ["vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio", "vazio"]
+  },
+  "cronica": {
+    "principios_da_cronica": "",
+    "pilares_e_conviccoes": "",
+    "perdicao_do_cla": ""
+  },
+  "vantagens_e_defeitos": [
+    {
+      "nome": "",
+      "tipo": "vantagem",
+      "nivel": 0,
+      "descricao": ""
+    }
+  ],
+  "potencia_de_sangue": {
+    "nivel": 0,
+    "surto_de_sangue": "",
+    "quantidade_recuperada": "",
+    "bonus_de_poder": "",
+    "rerrolagem_de_sangue": "",
+    "penalidade_de_alimentacao": "",
+    "gravidade_da_perdicao": ""
+  },
+  "experiencia": {
+    "total": 0,
+    "gasta": 0
+  },
+  "biografia": {
+    "idade_verdadeira": "",
+    "idade_aparente": "",
+    "data_de_nascimento": "",
+    "data_de_morte": "",
+    "aparencia": "",
+    "tracos_distintivos": "",
+    "historia": ""
+  },
+  "notas": ""
+}
 `;
 }
 
