@@ -131,4 +131,3 @@ Ou seja: a ficha mockada serve como exemplo visual e funcional da experiencia. E
 - OpenAI API
 - Docker
 - ESLint
-#vampiro-app
