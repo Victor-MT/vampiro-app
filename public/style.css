@@ -37,6 +37,19 @@ body {
   border-radius: 4px;
 }
 
+.toolbar .github-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  color: rgba(255, 255, 255, 0.62);
+  transition: color 0.2s ease;
+}
+
+.toolbar .github-link:hover {
+  color: #fff;
+}
+
 .dialog-overlay {
   position: fixed;
   inset: 0;
