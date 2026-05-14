@@ -22,7 +22,7 @@ Por padrao, voce pode manter a IA desativada para desenvolver sem consumir API e
 
 ```env
 USE_AI=false
-OPENAI_API_KEY=
+GEMINI_API_KEY=
 ```
 
 Para rodar o projeto:

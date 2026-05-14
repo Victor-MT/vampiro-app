@@ -1,8 +1,8 @@
 export async function POST(req) {
   try {
-
+    
     // IA desativada
-    if (process.env.USE_AI !== "true" || !process.env.OPENAI_API_KEY) {
+    if (process.env.USE_AI !== "true" || !process.env.GEMINI_API_KEY) {
       
       return Response.json({
         success: false,
@@ -12,38 +12,53 @@ export async function POST(req) {
     }
 
     const { prompt } = await req.json();
-
+    
+    console.log("Prompt recebido:", prompt);
+    
     const response = await fetch(
-      "https://api.openai.com/v1/responses",
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "gpt-4.1-mini",
-          input: prompt
+          contents: [
+            {
+              role: "user",
+              parts: [{ text: prompt }]
+            }
+          ],
+          generationConfig: {
+            responseMimeType: "application/json"
+          }
         })
       }
     );
 
+    if (!response.ok) {
+      throw new Error(`Gemini API error: ${response.status}`);
+    }
+
     const data = await response.json();
+    const text = data.candidates?.[0]?.content?.parts
+      ?.map((part) => part.text || "")
+      .join("");
 
     return Response.json({
       success: true,
       ai_enabled: true,
-      data: JSON.parse(data.output_text)
+      data: JSON.parse(text)
     });
 
   } catch (error) {
 
-    console.error(error);
+    console.log("Erro ao gerar ficha:", error.message);
 
     return Response.json({
       success: false,
       ai_enabled: true,
-      message: "Erro ao gerar ficha."
+      message: `Erro ao gerar ficha: ${error.message}`
     },{
       status: 500
     });

@@ -53,13 +53,13 @@ cp .env.example .env
 Edite o `.env` com as suas configuracoes:
 
 ```env
-OPENAI_API_KEY=sua_chave_aqui
+GEMINI_API_KEY=sua_chave_aqui
 USE_AI=false
 ```
 
 Variaveis:
 
-- `OPENAI_API_KEY`: chave da API usada pela rota de geracao por IA.
+- `GEMINI_API_KEY`: chave da API usada pela rota de geracao por IA.
 - `USE_AI`: define se a integracao real com IA sera usada. Use `true` para ativar e `false` para manter os dados de exemplo.
 
 Por padrao, deixe `USE_AI=false` se voce quiser rodar apenas a versao visual/local sem consumir API externa.
@@ -90,7 +90,7 @@ Na tela da ficha, voce pode:
 Para ativar a geracao real por IA, configure o `.env` assim:
 
 ```env
-OPENAI_API_KEY=sua_chave_real
+GEMINI_API_KEY=sua_chave_real
 USE_AI=true
 ```
 
@@ -100,7 +100,7 @@ Depois reinicie o servidor:
 npm run dev
 ```
 
-Quando `USE_AI` nao estiver como `true`, ou quando `OPENAI_API_KEY` nao existir, o app nao chama a API externa. Nesse caso, ao usar **Gerar por Prompt**, ele carrega uma ficha de exemplo.
+Quando `USE_AI` nao estiver como `true`, ou quando `GEMINI_API_KEY` nao existir, o app nao chama a API externa. Nesse caso, ao usar **Gerar por Prompt**, ele carrega uma ficha de exemplo.
 
 ## Rodando com Docker
 
