@@ -7,14 +7,14 @@ Criar personagens para uma campanha de RPG de mesa pode ser uma das partes mais 
 
 O **Vampiro App** nasceu para aliviar essa dor. Ele ajuda mestres e jogadores de **Vampiro: A Mascara V5** a criar, preencher, imprimir e exportar fichas de personagem de forma rapida, visual e organizada.
 
-![Ficha](assets/ficha.png)
+![Ficha](docs/ficha.png)
 
 **Quando a campanha precisa de um personagem <u>agora</u>, o app entra como o salvador da noite.**
 
 ### Geração de personagem com IA ✨
 O grande diferencial esta na geracao com IA: o mestre pode descrever o personagem em um prompt, como "*um Nosferatu informante que vive nos tuneis da cidade e vende segredos para qualquer seita*", e o app gera uma ficha inicial pronta para editar, usar ou imprimir.
 
-![Ficha](assets/prompt.png)
+![Ficha](docs/prompt.png)
 
 ## O que o projeto faz
 
